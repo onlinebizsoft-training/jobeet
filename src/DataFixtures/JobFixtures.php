@@ -16,7 +16,9 @@ class JobFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager): void
     {
+        // Insert values for each job
         $jobSensioLabs = new Job();
+        // Reference to object Category has column "name" = "Programming"
         $jobSensioLabs->setCategory($manager->merge($this->getReference('category-programming')));
         $jobSensioLabs->setType('full-time');
         $jobSensioLabs->setCompany('Sensio Labs');
@@ -48,9 +50,11 @@ class JobFixtures extends Fixture implements DependentFixtureInterface
         $jobExtremeSensio->setEmail('job@example.com');
         $jobExtremeSensio->setExpiresAt(new \DateTime('+30 days'));
 
+        // Put all of changes into queue
         $manager->persist($jobSensioLabs);
         $manager->persist($jobExtremeSensio);
 
+        // Execute all of changes in queue
         $manager->flush();
     }
 
@@ -59,6 +63,7 @@ class JobFixtures extends Fixture implements DependentFixtureInterface
      */
     public function getDependencies(): array
     {
+        // Set CategoryFixtures is executed earlier than JobFixtures
         return [
             CategoryFixtures::class,
         ];
