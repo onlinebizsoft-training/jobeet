@@ -5,7 +5,7 @@ services:
         container_name: jobeet-mysql
         working_dir: /application
         volumes:
-            - ./mysql-data:/var/lib/mysql
+            - .:/application
         environment:
             - MYSQL_ROOT_PASSWORD=password
             - MYSQL_DATABASE=jobeet
