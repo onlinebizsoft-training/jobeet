@@ -3,14 +3,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Job;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
-/**
- * @Route("job")
- */
 class JobController extends AbstractController
 {
     /**
@@ -20,20 +20,24 @@ class JobController extends AbstractController
      *
      * @return Response
      */
-    public function list(): Response
+    public function list(EntityManagerInterface $em): Response
     {
-        // getDoctrine()->getRepository(): fetch Job Entity.
-        $jobs = $this->getDoctrine()->getRepository(Job::class)->findAll();
+        // Execute get catogories have active jobs in CategoryRepository
+        $categories = $em->getRepository(Category::class)->findWithActiveJobs();
+
         // Render view list job, attach param jobs.
         return $this->render('job/list.html.twig', [
-            'jobs' => $jobs,
+            'categories' => $categories,
         ]);
     }
 
     /**
      * Finds and displays a job entity.
      *
-     * @Route("/{id}", name="job.show")
+     * @Route("job/{id}", name="job.show", requirements={"id" = "\d+"})
+     *
+     * @Entity("job", expr="repository.findActiveJob(id)")
+     * If job expried -> findActiveJob return null
      *
      * @param Job $job
      *
