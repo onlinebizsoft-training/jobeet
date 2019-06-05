@@ -5,9 +5,10 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  * @ORM\Table(name="categories")
  */
 class Category
@@ -101,9 +102,7 @@ class Category
      */
     public function removeJob(Job $job): Category
     {
-        if (!$this->jobs->contains($job)) {
-            $this->jobs->add($job);
-        }
+        $this->jobs->removeElement($job);
 
         return $this;
     }
@@ -130,5 +129,12 @@ class Category
         $this->affiliates->removeElement($affiliate);
 
         return $this;
+    }
+
+    public function getActiveJobs()
+    {
+        return $this->jobs->filter(function (Job $job) {
+            return $job->getExpiresAt() > new \DateTime();
+        });
     }
 }
