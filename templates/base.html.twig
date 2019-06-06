@@ -9,20 +9,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     </head>
     <body>
-        <nav class="navbar navbar-default">
+        <nav class="navbar bg-light">
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ path('job.list') }}">Jobeet</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <div>
-                                <a class="btn btn-default navbar-btn" href="#">Post a Job</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <a class="navbar-brand text-dark" href="{{ path('job.list') }}">Jobeet</a>
+                <ul class="navbar-nav">
+                    <li class="nav-link">
+                        <a class="nav-link text-dark pt-1 pb-1 pl-2 pr-2 bg-white" style="border: 1px solid #C9C9C9; border-radius: 5px;" href="#">
+                            Post a Job
+                        </a>
+                    </li>
+                </ul>
             </div>
         </nav>
 
