@@ -4,3 +4,4 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         max_jobs_on_homepage: '%max_jobs_on_homepage%'
+        max_jobs_on_category: '%max_jobs_on_category%'
