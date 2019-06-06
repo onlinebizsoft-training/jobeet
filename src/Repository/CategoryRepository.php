@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityRepository;
 
 class CategoryRepository extends EntityRepository
 {
+    // Find categories have active job
     public function findWithActiveJobs()
     {
         return $this->createQueryBuilder('c')
