@@ -39,7 +39,7 @@ class CreateCategoryCommand extends Command
     }
 
     /**
-     * This method is second chance if user forget to fill the name.
+     * This method is second chance if user forget to fill the name
      *
      * @param InputInterface $input
      * @param OutputInterface $output
