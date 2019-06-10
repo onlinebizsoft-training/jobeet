@@ -26,6 +26,7 @@ class JobType extends AbstractType
 {
     /**
      * {@inheritDoc}
+     *
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -114,6 +115,7 @@ class JobType extends AbstractType
 
     /**
      * {@inheritDoc}
+     *
      * @param OptionsResolver $resolver
      */
     public function configureOption(OptionsResolver $resolver)
