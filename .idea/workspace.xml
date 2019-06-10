@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1abe9566-44e1-4da0-be0d-3c1210bd2169" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/Admin/CategoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Admin/JobController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/Admin/CategoryType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/base.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/category/create.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/category/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/category/list.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/job/create.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/job/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/job/list.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/table.html.twig" afterDir="false" />
+    <list default="true" id="1abe9566-44e1-4da0-be0d-3c1210bd2169" name="Default Changelist" comment="day 10: CRUD category, job for admin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/job/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/job/edit.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +36,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/Admin/CategoryController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+            <state relative-caret-position="-775">
+              <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
               <folding>
                 <element signature="e#42#66#0#PHP" expanded="true" />
                 <element signature="e#1649#1682#0#PHP" expanded="true" />
@@ -63,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/src/Controller/Admin/JobController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-850">
-              <caret line="39" column="48" lean-forward="true" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
+              <caret line="39" column="48" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
               <folding>
                 <element signature="e#41#60#0#PHP" expanded="true" />
                 <element signature="e#1307#1333#0#PHP" expanded="true" />
@@ -77,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/admin/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="24" column="78" selection-start-line="24" selection-start-column="78" selection-end-line="24" selection-end-column="78" />
+            <state relative-caret-position="365">
+              <caret line="28" column="89" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="89" />
               <folding>
                 <element signature="e#895#914#0#Twig" expanded="true" />
                 <element signature="e#1050#1064#0#Twig" expanded="true" />
@@ -91,14 +79,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/job/edit.html.twig">
+        <entry file="file://$PROJECT_DIR$/templates/admin/category/list.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="132" selection-start-line="6" selection-start-column="132" selection-end-line="6" selection-end-column="132" />
+            <state relative-caret-position="45">
+              <caret line="3" column="96" selection-start-line="3" selection-start-column="96" selection-end-line="3" selection-end-column="96" />
               <folding>
                 <element signature="e#12#32#0#Twig" expanded="true" />
-                <element signature="e#157#188#0#HTML" expanded="true" />
-                <element signature="e#94#115#0#Twig" expanded="true" />
+                <element signature="e#740#759#0#Twig" expanded="true" />
+                <element signature="e#942#963#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/job/edit.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+              <folding>
+                <element signature="e#129#165#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -166,7 +166,6 @@
         <option value="$PROJECT_DIR$/src/Controller/CategoryController.php" />
         <option value="$PROJECT_DIR$/src/Controller/JobController.php" />
         <option value="$PROJECT_DIR$/templates/job/control_panel.html.twig" />
-        <option value="$PROJECT_DIR$/templates/job/edit.html.twig" />
         <option value="$PROJECT_DIR$/templates/job/create.html.twig" />
         <option value="$PROJECT_DIR$/src/Service/FileUploader.php" />
         <option value="$PROJECT_DIR$/src/EventListener/JobTokenListener.php" />
@@ -176,7 +175,6 @@
         <option value="$PROJECT_DIR$/src/Form/JobType.php" />
         <option value="$PROJECT_DIR$/templates/admin/category/form.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Category.php" />
-        <option value="$PROJECT_DIR$/templates/admin/category/list.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Admin/CategoryController.php" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/templates/admin/job/form.html.twig" />
@@ -188,6 +186,8 @@
         <option value="$PROJECT_DIR$/src/Controller/Admin/JobController.php" />
         <option value="$PROJECT_DIR$/templates/admin/job/list.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin/base.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin/category/list.html.twig" />
+        <option value="$PROJECT_DIR$/templates/job/edit.html.twig" />
       </list>
     </option>
   </component>
@@ -483,7 +483,7 @@
       <workItem from="1559888789084" duration="232000" />
       <workItem from="1559889043858" duration="15779000" />
       <workItem from="1560061483633" duration="25168000" />
-      <workItem from="1560135810341" duration="21641000" />
+      <workItem from="1560135810341" duration="22521000" />
     </task>
     <task id="LOCAL-00001" summary="day 1: ini">
       <created>1559808919720</created>
@@ -555,11 +555,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560151119889</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="day 10: CRUD category, job for admin">
+      <created>1560164713383</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1560164713383</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134453000" />
+    <option name="totallyTimeSpent" value="135333000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -571,13 +578,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="705" y="27" width="661" height="741" extended-state="4" />
+    <frame x="44" y="27" width="1322" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="top" id="Terminal" order="0" weight="0.36597937" />
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.39512196" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.19043887" />
       <window_info anchor="bottom" id="Messages" weight="0.3298969" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3298969" />
@@ -630,7 +637,8 @@
     <MESSAGE value="day 8: update" />
     <MESSAGE value="day 8: ini" />
     <MESSAGE value="day 9: create category by command" />
-    <option name="LAST_COMMIT_MESSAGE" value="day 9: create category by command" />
+    <MESSAGE value="day 10: CRUD category, job for admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="day 10: CRUD category, job for admin" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190605101330.php" />
@@ -702,13 +710,6 @@
             <element signature="e#142#155#0#Twig" expanded="true" />
             <element signature="e#273#288#0#Twig" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/job/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
@@ -950,18 +951,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/job/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="132" selection-start-line="6" selection-start-column="132" selection-end-line="6" selection-end-column="132" />
-          <folding>
-            <element signature="e#12#32#0#Twig" expanded="true" />
-            <element signature="e#157#188#0#HTML" expanded="true" />
-            <element signature="e#94#115#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/JobController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-10">
@@ -970,18 +959,6 @@
             <element signature="e#35#59#0#PHP" expanded="true" />
             <element signature="e#1509#1529#0#PHP" expanded="true" />
             <element signature="e#5404#5416#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/category/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="22" column="28" lean-forward="true" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding>
-            <element signature="e#12#32#0#Twig" expanded="true" />
-            <element signature="e#740#759#0#Twig" expanded="true" />
-            <element signature="e#942#963#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1016,22 +993,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/CategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
-          <folding>
-            <element signature="e#42#66#0#PHP" expanded="true" />
-            <element signature="e#1649#1682#0#PHP" expanded="true" />
-            <element signature="e#2369#2390#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Admin/JobController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-850">
-          <caret line="39" column="48" lean-forward="true" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
+          <caret line="39" column="48" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
           <folding>
             <element signature="e#41#60#0#PHP" expanded="true" />
             <element signature="e#1307#1333#0#PHP" expanded="true" />
@@ -1046,11 +1011,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="24" column="78" selection-start-line="24" selection-start-column="78" selection-end-line="24" selection-end-column="78" />
+        <state relative-caret-position="365">
+          <caret line="28" column="89" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="89" />
           <folding>
             <element signature="e#895#914#0#Twig" expanded="true" />
             <element signature="e#1050#1064#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/CategoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-775">
+          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="e#42#66#0#PHP" expanded="true" />
+            <element signature="e#1649#1682#0#PHP" expanded="true" />
+            <element signature="e#2369#2390#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/job/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="132" selection-start-line="6" selection-start-column="132" selection-end-line="6" selection-end-column="132" />
+          <folding>
+            <element signature="e#12#32#0#Twig" expanded="true" />
+            <element signature="e#157#188#0#HTML" expanded="true" />
+            <element signature="e#94#115#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/category/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="96" selection-start-line="3" selection-start-column="96" selection-end-line="3" selection-end-column="96" />
+          <folding>
+            <element signature="e#12#32#0#Twig" expanded="true" />
+            <element signature="e#740#759#0#Twig" expanded="true" />
+            <element signature="e#942#963#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/job/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+          <folding>
+            <element signature="e#129#165#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
