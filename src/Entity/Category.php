@@ -64,7 +64,7 @@ class Category
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -72,7 +72,7 @@ class Category
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -146,7 +146,7 @@ class Category
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -164,7 +164,7 @@ class Category
     public function getActiveJobs()
     {
         return $this->jobs->filter(function (Job $job) {
-            return $job->getExpiresAt() > new \DateTime();
+            return $job->getExpiresAt() > new \DateTime() && $job->isActivated();
         });
     }
 }
