@@ -5,7 +5,6 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Date;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -44,7 +43,7 @@ class Category
     /**
      * @var Job[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Job", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Job", mappedBy="category", cascade={"remove"})
      */
     private $jobs;
 
@@ -117,6 +116,14 @@ class Category
         $this->jobs->removeElement($job);
 
         return $this;
+    }
+
+    /**
+     * @return Affiliate[]|ArrayCollection
+     */
+    public function getAffiliates()
+    {
+        return $this->affiliates;
     }
 
     /**
