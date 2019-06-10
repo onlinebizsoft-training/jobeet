@@ -28,7 +28,6 @@ class CategoryController extends AbstractController
             $page,  // page
             $this->getParameter('max_jobs_on_category')  // elements per page
         );
-
         return $this->render('category/show.html.twig', [
             'category' => $category,
             'activeJobs' => $activeJobs
