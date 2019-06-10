@@ -23,7 +23,6 @@ class FileUploader
 
     /**
      * Get target directory
-     *
      * @return string
      */
     public function getTargetDirectory(): string
