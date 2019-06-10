@@ -3,7 +3,9 @@
 {% block body %}
     {% for category in categories %}
         <h4 class="mt-5">
-            <a class="text-dark" href="{{ path('category.show', {slug: category.slug}) }}">{{ category.name }}</a>
+            <a href="{{ path('category.show', {slug: category.slug}) }}">
+                {{ category.name }}
+            </a>
         </h4>
         {% include 'table.html.twig' with {
             'jobs': category.activeJobs|slice(0, max_jobs_on_homepage)
