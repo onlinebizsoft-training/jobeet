@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Job;
+use App\Service\JobHistoryService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,7 @@ class CategoryController extends AbstractController
      *
      * @return Response
      */
-    public function show(Category $category, int $page, PaginatorInterface $paginator): Response
+    public function show(Category $category, int $page, PaginatorInterface $paginator, JobHistoryService $jobHistoryService): Response
     {
         $activeJobs = $paginator->paginate(
             $this->getDoctrine()->getRepository(Job::class)->getPaginatedActiveJobsByCategoryQuery($category),
@@ -30,7 +31,8 @@ class CategoryController extends AbstractController
         );
         return $this->render('category/show.html.twig', [
             'category' => $category,
-            'activeJobs' => $activeJobs
+            'activeJobs' => $activeJobs,
+            'historyJobs' => $jobHistoryService->getJobs()
         ]);
     }
 }

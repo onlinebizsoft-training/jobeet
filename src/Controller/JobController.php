@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Job;
 use App\Form\JobType;
+use App\Service\JobHistoryService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +21,20 @@ class JobController extends AbstractController
     /**
      * Lists all job entities.
      *
-     * @Route("/", name="job.list")
+     * @Route("/", name="job.list", methods="GET")
+     *
+     * @param EntityManagerInterface $em
+     * @param JobHistoryService $jobHistoryService
      * @return Response
      */
-    public function list(EntityManagerInterface $em): Response
+    public function list(EntityManagerInterface $em, JobHistoryService $jobHistoryService): Response
     {
         // Execute get catogories have active jobs in CategoryRepository
         $categories = $em->getRepository(Category::class)->findWithActiveJobs();
         // Render view list job, attach param jobs.
         return $this->render('job/list.html.twig', [
             'categories' => $categories,
+            'historyJobs' => $jobHistoryService->getJobs()
         ]);
     }
 
@@ -44,8 +49,9 @@ class JobController extends AbstractController
      * @param Job $job
      * @return Response
      */
-    public function show(Job $job): Response
+    public function show(Job $job, JobHistoryService $jobHistoryService): Response
     {
+        $jobHistoryService->addJob($job);
         // Render view show a job by id, attach param job.
         return $this->render('job/show.html.twig', [
             'job' => $job,

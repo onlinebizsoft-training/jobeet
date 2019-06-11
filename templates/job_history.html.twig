@@ -1,0 +1,15 @@
+{% if historyJobs %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            Recent viewed jobs:
+            {% for historyJob in historyJobs %}
+                {% if historyJob %}
+                    <a href="{{ path('job.show', {id: historyJob.id}) }}">
+                        {{ historyJob.position ~ ' - ' ~ historyJob.company}}
+                        {{ loop.last ? '' : ', ' }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
