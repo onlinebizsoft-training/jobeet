@@ -17,7 +17,7 @@ class JobTokenListener
         }
 
         if (!$entity->getToken()) {
-            $entity->setToken(bin2hex(random_bytes(10)));
+            $entity->setToken(\bin2hex(\random_bytes(10)));
         }
     }
 }
