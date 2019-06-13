@@ -1,7 +1,7 @@
 {% if historyJobs %}
     <div class="panel panel-default">
         <div class="panel-body">
-            Recent viewed jobs:
+            {{ 'Recent viewed jobs:'|trans }}
             {% for historyJob in historyJobs %}
                 {% if historyJob %}
                     <a href="{{ path('job.show', {id: historyJob.id}) }}">

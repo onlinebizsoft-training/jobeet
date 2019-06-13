@@ -1,0 +1,56 @@
+Jobeet: Jobeet
+'Admin Panel': 'Quản trị viên'
+Affiliates: 'Cộng tác viên'
+'Post a Job': 'Đăng việc làm'
+Logout: 'Đăng xuất'
+'Jobeet - Your best job board': 'Jobeet - Việc làm tốt nhất cho bạn'
+'Control Panel:': 'Thanh điều khiển:'
+Delete: Xoá
+Expired: 'Đã hết hạn'
+'Expires in': 'Hiệu lực còn'
+days: ngày
+'Extend (for another 30 days)': 'Gia hạn (thêm 30 ngày nữa)'
+Edit: Sửa
+Publish: 'Công khai'
+'Bookmart this': 'Ghim đường'
+URL: Link
+'to manage this job in the future': 'này để quản lý công việc của bạn.'
+'Job creation': 'Tạo việc làm mới'
+Create: Tạo
+'posted on': 'ngày đăng:'
+'How to apply': 'Cách ứng tuyển'
+'Back to list': 'Trở lại danh sách'
+'Job edit': 'Chỉnh sửa việc làm'
+'Create new': 'Tạo mới'
+Company: 'Công ty'
+Position: 'Vị trí'
+Location: 'Địa chỉ'
+Email: Email
+Activated: 'Kích hoạt'
+Actions: 'Thao tác'
+'Are you sure you want to delete this category?': 'Bạn có chắc muốn danh mục này không?'
+'Create new job': 'Tạo công việc mới'
+'Edit job': 'Chỉnh sửa công việc'
+'Jobeet Admin': 'Quản trị Jobeet'
+Categories: 'Danh mục'
+Jobs: 'Việc làm'
+Save: Lưu
+Active: 'Kích hoạt'
+'Yes': 'Đã kích hoạt'
+'No': 'Chưa kích hoạt'
+Deactivate: 'Vô hiệu hóa'
+Activate: 'Kích hoạt'
+Name: Tên
+'Create new category': 'Tạo danh mục mới'
+'Edit category': 'Chỉnh sửa danh mục'
+City: 'Thành phố'
+'Become an Affiliate': 'Trở thành Cộng tác viên'
+'Your affiliate account has been created': 'Tài khoản cộng tác viên của bạn đã được tạo'
+'Thank you! You will receive an email with your affiliate token as soon as your account will be activated.': 'Bạn sẽ nhận được một email với mã bảo mật ngay khi tài khoản của bạn được kích hoạt.'
+'Jobs in the %category% category': 'Việc làm thuộc danh mục %category%'
+'Recent viewed jobs:': 'Việc làm đã xem gần đây:'
+Type: Loại
+Description: 'Mô tả công việc'
+Public: 'Công khai'
+'Are you sure you want to delete this job?': 'Bạn có chắc muốn việc làm này không?'
+Job: 'Việc làm'
