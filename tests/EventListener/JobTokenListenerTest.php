@@ -4,10 +4,9 @@
 namespace App\Tests\EventListener;
 
 
-use App\Entity\Affiliate;
 use App\Entity\Job;
-use App\EventListener\AffiliateTokenListener;
 use App\EventListener\JobTokenListener;
+use App\Tests\EventListener\Stub\NonEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PHPUnit\Framework\TestCase;
@@ -17,8 +16,7 @@ class JobTokenListenerTest extends TestCase
     public function testJobTokenListenerIsSet(): void
     {
         // Mock up an EntityManagerInterface object
-        $em = $this->getMockBuilder(::class)
-                   ->getMock();
+        $em = $this->createMock(EntityManagerInterface::class);
 
         $args = new LifecycleEventArgs(new Job(), $em);
 
@@ -31,18 +29,9 @@ class JobTokenListenerTest extends TestCase
     public function testNonJobIgnored(): void
     {
         // Mock up an EntityManagerInterface object
-        $em = $this->getMockBuilder(EntityManagerInterface::class)
-            ->getMock();
+        $em = $this->createMock(EntityManagerInterface::class);
 
-        // Mock up an Affiliate object
-        $affiliate = $this->getMockBuilder(Affiliate::class)
-            ->getMock();
-
-        // Unit test is fail if setToken method of Affiliate is used
-        $affiliate->expects($this->never())
-            ->method('setToken');
-
-        $args = new LifecycleEventArgs($affiliate, $em);
+        $args = new LifecycleEventArgs(new NonEntity(), $em);
 
         $listener = new JobTokenListener();
         $listener->prePersist($args);
