@@ -3,6 +3,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DateTimeAwareTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use JMS\Serializer\Annotation as JMS;
@@ -16,6 +17,8 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Job
 {
+    use DateTimeAwareTrait;
+
     public const FULL_TIME_TYPE = 'full-time';
     public const PART_TIME_TYPE = 'part-time';
     public const FREELANCE_TYPE = 'freelance';
@@ -357,7 +360,6 @@ class Job
     public function setPublic(bool $public) : Job
     {
         $this->public = $public;
-
         return $this;
     }
 
@@ -376,7 +378,6 @@ class Job
     public function setActivated(bool $activated) : Job
     {
         $this->activated = $activated;
-
         return $this;
     }
 
@@ -455,8 +456,8 @@ class Job
      */
     public function prePersist()
     {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
+        $this->createdAt = $this->getCurrentDateTime();
+        $this->updatedAt = $this->getCurrentDateTime();
 
         if (!$this->expiresAt) {
             $this->expiresAt = (clone $this->createdAt)->modify('+30 days');
@@ -468,7 +469,7 @@ class Job
      */
     public function preUpdate()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = $this->getCurrentDateTime();
     }
 
     /**
