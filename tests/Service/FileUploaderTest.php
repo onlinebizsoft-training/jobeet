@@ -32,5 +32,6 @@ class FileUploaderTest extends TestCase
         $service = new FileUploader('_DIR_');
         $fileName = $service->upload($em);
         $this->assertRegExp('/.+?\._EXT_/', $fileName);
+        $this->assertEquals('_DIR_', $service->getTargetDirectory());
     }
 }
