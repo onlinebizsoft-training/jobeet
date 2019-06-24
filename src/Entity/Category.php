@@ -7,6 +7,7 @@ use App\Entity\Traits\DateTimeAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -173,8 +174,17 @@ class Category
 
     public function getActiveJobs()
     {
-        return $this->jobs->filter(function (Job $job) {
-            return $job->getExpiresAt() > $this->getCurrentDateTime() && $job->isActivated();
-        });
+        $cache = new FilesystemAdapter('', 60);
+        $item = $cache->getItem('listActiveJobs' . $this->getName());
+        if (!$item->isHit()) {
+            $jobs = $this->jobs->filter(function (Job $job) {
+                return $job->getExpiresAt() > $this->getCurrentDateTime() && $job->isActivated();
+            });
+            $item->set($jobs);
+            $cache->save($item);
+        }
+        if ($cache->hasItem('listActiveJobs' . $this->getName())) {
+            return $item->get();
+        }
     }
 }
