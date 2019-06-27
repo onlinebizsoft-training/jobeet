@@ -8,6 +8,8 @@ use App\Entity\Job;
 use App\Form\JobType;
 use App\Service\JobHistoryService;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +31,7 @@ class JobController extends AbstractController
      */
     public function list(EntityManagerInterface $em, JobHistoryService $jobHistoryService): Response
     {
-        // Execute get catogories have active jobs in CategoryRepository
+        // Execute get categories have active jobs in CategoryRepository
         $categories = $em->getRepository(Category::class)->findWithActiveJobs();
         // Render view list job, attach param jobs.
         return $this->render('job/list.html.twig', [
@@ -44,30 +46,45 @@ class JobController extends AbstractController
      * @Route("job/{id}", name="job.show", methods="GET", requirements={"id" = "\d+"})
      *
      * @Entity("job", expr="repository.findActiveJob(id)")
-     * If job expried -> findActiveJob return null
+     * If job expired -> findActiveJob return null
      *
      * @param Job $job
+     * @param JobHistoryService $jobHistoryService
      * @return Response
+     * @throws InvalidArgumentException
      */
     public function show(Job $job, JobHistoryService $jobHistoryService): Response
     {
         $jobHistoryService->addJob($job);
-        // Render view show a job by id, attach param job.
-        return $this->render('job/show.html.twig', [
-            'job' => $job,
-        ]);
+        $cache = new FilesystemAdapter('', 120);
+        $item = $cache->getItem('job' . $job->getId());
+        if (!$item->isHit()) {
+            $item->set($job);
+            $cache->save($item);
+        }
+        if ($cache->hasItem('job' . $job->getId())) {
+            // Render view show a job by id, attach param job.
+            return $this->render('job/show.html.twig', [
+                'job' => $item->get()
+            ]);
+        }
     }
 
     /**
      * Create a new job entity
      *
      * @Route("job/create", name="job.create", methods={"GET","POST"})
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param FileUploader $fileUploader
      * @return Response
+     * @throws InvalidArgumentException
      */
     public function create(Request $request, EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
         $job = new Job();
-        $form = $this->createForm(JobType::class, $job);
+        $form = $this->createForm(JobType::class, $job, ['csrf_protection' => false]);
         // Maps request data to form
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -82,9 +99,22 @@ class JobController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('job.preview', ['token' => $job->getToken()]);
         }
-        return $this->render('job/create.html.twig', [
-            'form' => $form->createView()
-        ]);
+        
+        $cache = new FilesystemAdapter('', 120);
+        $item = $cache->getItem('formCreateJob');
+        if (!$item->isHit()) {
+            // Set form into item
+            $item->set($this->render('job/form.html.twig', ['form' => $form->createView()]));
+            $cache->save($item);
+        }
+        if ($cache->hasItem('formCreateJob')) {
+            // Remove header HTTP
+            $view = explode('GMT', $item->get());
+            // Render Form in Create template
+            return $this->render('job/create.html.twig', [
+                'form' => trim($view[1])
+            ]);
+        }
     }
 
     /**
