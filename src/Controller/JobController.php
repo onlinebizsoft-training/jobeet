@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Controller\Traits\FormCacheTrait;
 use App\Entity\Category;
 use App\Entity\Job;
 use App\Form\JobType;
@@ -20,6 +21,8 @@ use App\Service\FileUploader;
 
 class JobController extends AbstractController
 {
+    use FormCacheTrait;
+
     /**
      * Lists all job entities.
      *
@@ -84,7 +87,18 @@ class JobController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
         $job = new Job();
-        $form = $this->createForm(JobType::class, $job, ['csrf_protection' => false]);
+        $form = $this->createForm(JobType::class, $job);
+
+        // Get token csrf
+        $tokenProvider = $this->container->get('security.csrf.token_manager');
+        $token = $tokenProvider->getToken('job')->getValue();
+
+        // Return token for ajax request
+        if ($request->request->get('token')) {
+            echo $token;
+            exit;
+        }
+
         // Maps request data to form
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -99,22 +113,9 @@ class JobController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('job.preview', ['token' => $job->getToken()]);
         }
-        
-        $cache = new FilesystemAdapter('', 120);
-        $item = $cache->getItem('formCreateJob');
-        if (!$item->isHit()) {
-            // Set form into item
-            $item->set($this->render('job/form.html.twig', ['form' => $form->createView()]));
-            $cache->save($item);
-        }
-        if ($cache->hasItem('formCreateJob')) {
-            // Remove header HTTP
-            $view = explode('GMT', $item->get());
-            // Render Form in Create template
-            return $this->render('job/create.html.twig', [
-                'form' => trim($view[1])
-            ]);
-        }
+
+        // Cache form
+        return $this->cacheForm('formCreateJob', 'job', $form->createView());
     }
 
     /**
@@ -157,13 +158,13 @@ class JobController extends AbstractController
     public function preview(Job $job): Response
     {
         $deleteForm = $this->createFormBuilder()
-                           ->setAction($this->generateUrl('job.delete', ['token' => $job->getToken()]))
-                           ->setMethod('DELETE')
-                           ->getForm();
+            ->setAction($this->generateUrl('job.delete', ['token' => $job->getToken()]))
+            ->setMethod('DELETE')
+            ->getForm();
         $publishForm = $this->createFormBuilder(['token' => $job->getToken()])
-                            ->setAction($this->generateUrl('job.publish', ['token' => $job->getToken()]))
-                            ->setMethod('POST')
-                            ->getForm();
+            ->setAction($this->generateUrl('job.publish', ['token' => $job->getToken()]))
+            ->setMethod('POST')
+            ->getForm();
         return $this->render('job/show.html.twig', [
             'job' => $job,
             'hasControlAccess' => true, // if user has control access, user can go to preview page
@@ -186,9 +187,9 @@ class JobController extends AbstractController
     {
         // Create a form with delete method to delete a job entity
         $form = $this->createFormBuilder()
-                     ->setAction($this->generateUrl('job.delete', ['token' => $job->getToken()]))
-                     ->setMethod('DELETE')
-                     ->getForm();
+            ->setAction($this->generateUrl('job.delete', ['token' => $job->getToken()]))
+            ->setMethod('DELETE')
+            ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->remove($job);
@@ -212,9 +213,9 @@ class JobController extends AbstractController
     {
         // Create a form with post method to active a job entity
         $form = $this->createFormBuilder(['token' => $job->getToken()])
-                     ->setAction($this->generateUrl('job.publish', ['token' => $job->getToken()]))
-                     ->setMethod('POST')
-                     ->getForm();
+            ->setAction($this->generateUrl('job.publish', ['token' => $job->getToken()]))
+            ->setMethod('POST')
+            ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $job->setActivated(true);

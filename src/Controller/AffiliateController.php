@@ -3,12 +3,12 @@
 
 namespace App\Controller;
 
-
+use App\Controller\Traits\FormCacheTrait;
 use App\Entity\Affiliate;
 use App\Form\AffiliateType;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AffiliateController extends AbstractController
 {
+    use FormCacheTrait;
+
     /**
      * Creates a new affiliate entity
      *
@@ -29,12 +31,24 @@ class AffiliateController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $affiliate = new Affiliate();
-        $form = $this->createForm(AffiliateType::class, $affiliate, ['csrf_protection' => false]);
+        $form = $this->createForm(AffiliateType::class, $affiliate);
+
+        // Get token csrf
+        $tokenProvider = $this->container->get('security.csrf.token_manager');
+        $token = $tokenProvider->getToken('affiliate')->getValue();
+
+        // Return token for ajax request
+        if ($request->request->get('token')) {
+            echo $token;
+            exit;
+        }
+
+        // Handle data form
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $affiliate->setActive(false);
@@ -43,21 +57,8 @@ class AffiliateController extends AbstractController
             return $this->redirectToRoute('affiliate.wait');
         }
 
-        $cache = new FilesystemAdapter('', 120);
-        $item = $cache->getItem('formAffiliateCreate');
-        if (!$item->isHit()) {
-            // Set form into item
-            $item->set($this->render('affiliate/form.html.twig', ['form' => $form->createView()]));
-            $cache->save($item);
-        }
-        if ($cache->hasItem('formAffiliateCreate')) {
-            // Remove header HTTP
-            $view = explode('GMT', $item->get());
-            // Render Form in Create template
-            return $this->render('affiliate/create.html.twig', [
-                'form' => trim($view[1])
-            ]);
-        }
+        // Cache form
+        return $this->cacheForm('formAffiliateCreate', 'affiliate', $form->createView());
     }
 
     /**
